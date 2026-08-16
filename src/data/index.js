@@ -244,17 +244,20 @@ export const SERVICES = [
 
 export const PROJECTS = [
   {
-    title: "SpendSmart – Smart Expense Analytics Platform",
+    title: "OwlSync – Smart Expense Analytics Platform",
+    image: "../../public/owlsync.png",
     badge: "Source Available",
     tags: ["Node.js", "Express.js", "MongoDB", "Redis", "JWT", "Joi"],
     grad: "linear-gradient(135deg,#0c2a20,#091a14)",
     desc: "Secure REST APIs managing transactions, categorisation and analytics for 5,000+ transactions/month, with MVC + repository pattern architecture, Redis-cached endpoints and optimised MongoDB aggregation pipelines averaging <500ms query latency.",
     links: {
-      code: "https://github.com/rohanraj1095?tab=repositories",
+      code: "https://github.com/rohanraj1095/OwlSync-Backend",
+      live: "https://owlsync-backend.onrender.com/",
     },
   },
   {
     title: "InsightNet – Real-Time News Web Application",
+    image: "../../public/insightnet.png",
     badge: "Live",
     tags: [
       "React.js",
@@ -266,7 +269,7 @@ export const PROJECTS = [
     grad: "linear-gradient(135deg,#1a2030,#0a0d12)",
     desc: "Real-time news app delivering concise 100-word summaries through a responsive React/Tailwind UI, backed by Node.js/Express REST APIs with secure Firebase Authentication and CI/CD deployment on Vercel.",
     links: {
-      code: "https://github.com/rohanraj1095?tab=repositories",
+      code: "https://github.com/rohanraj1095/theinsightnet",
       live: "https://insightnet.vercel.app/",
     },
   },
