@@ -245,7 +245,7 @@ export const SERVICES = [
 export const PROJECTS = [
   {
     title: "OwlSync – Smart Expense Analytics Platform",
-    image: "../../public/owlsync.png",
+    image: "/owlsync.png",
     badge: "Source Available",
     tags: ["Node.js", "Express.js", "MongoDB", "Redis", "JWT", "Joi"],
     grad: "linear-gradient(135deg,#0c2a20,#091a14)",
@@ -257,7 +257,7 @@ export const PROJECTS = [
   },
   {
     title: "InsightNet – Real-Time News Web Application",
-    image: "../../public/insightnet.png",
+    image: "/insightnet.png",
     badge: "Live",
     tags: [
       "React.js",

@@ -95,12 +95,115 @@ import {
   Github,
   ChevronLeft,
   ChevronRight,
+  Cpu,
 } from "lucide-react";
 import { C } from "../../styles/colors";
 import { PROJECTS } from "../../data";
 import { useBreakpoint } from "../../hooks/useBreakpoint";
 import { useInView } from "../../hooks/useInView";
 import { SecTitle, Pill } from "../ui/Atoms";
+
+// --- Inline Dynamic AI/Tech SVG Banner Fallback ---
+function TechSvgBanner({ title, grad }) {
+  return (
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        background:
+          grad ||
+          "linear-gradient(135deg, #090d16 0%, #111827 50%, #064e3b 100%)",
+        position: "relative",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        overflow: "hidden",
+      }}
+    >
+      {/* Abstract Tech Grid Background */}
+      <svg
+        width="100%"
+        height="100%"
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: 0.25,
+          pointerEvents: "none",
+        }}
+      >
+        <defs>
+          <pattern
+            id={`grid-${title}`}
+            width="24"
+            height="24"
+            patternUnits="userSpaceOnUse"
+          >
+            <path
+              d="M 24 0 L 0 0 0 24"
+              fill="none"
+              stroke="#3ee8a8"
+              strokeWidth="0.6"
+            />
+            <circle cx="24" cy="24" r="1" fill="#3ee8a8" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill={`url(#grid-${title})`} />
+      </svg>
+
+      {/* Cybernetic Geometric Accent */}
+      <svg
+        width="200"
+        height="200"
+        viewBox="0 0 200 200"
+        style={{ position: "absolute", opacity: 0.18, pointerEvents: "none" }}
+      >
+        <polygon
+          points="100,10 190,60 190,140 100,190 10,140 10,60"
+          fill="none"
+          stroke="#3ee8a8"
+          strokeWidth="1.5"
+        />
+        <polygon
+          points="100,30 170,70 170,130 100,170 30,130 30,70"
+          fill="none"
+          stroke="#cbd5e1"
+          strokeWidth="0.8"
+        />
+        <circle
+          cx="100"
+          cy="100"
+          r="35"
+          fill="none"
+          stroke="#3ee8a8"
+          strokeWidth="1"
+          strokeDasharray="4 2"
+        />
+      </svg>
+
+      {/* Center Label / Icon Badge */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          padding: "6px 14px",
+          borderRadius: 20,
+          background: "rgba(15, 23, 42, 0.65)",
+          border: "1px solid rgba(62, 232, 168, 0.25)",
+          backdropFilter: "blur(8px)",
+          color: "#e2e8f0",
+          fontSize: 12,
+          fontWeight: 600,
+          letterSpacing: "0.04em",
+          zIndex: 1,
+        }}
+      >
+        <Cpu size={14} color={C.mint || "#3ee8a8"} />
+        <span>{title}</span>
+      </div>
+    </div>
+  );
+}
 
 export function Projects() {
   const { isMobile, isTablet } = useBreakpoint();
@@ -179,13 +282,12 @@ export function Projects() {
                   "transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease",
               }}
             >
-              {/* Image Banner */}
+              {/* Media Container (Displays Image or AI-style Tech SVG) */}
               <div
                 style={{
                   height: 170,
                   position: "relative",
                   overflow: "hidden",
-                  background: p.grad || "rgba(255,255,255,0.03)",
                 }}
               >
                 {p.image ? (
@@ -198,17 +300,18 @@ export function Projects() {
                       objectFit: "cover",
                       transition: "transform 0.5s ease",
                     }}
-                    className="proj-img"
                   />
-                ) : null}
+                ) : (
+                  <TechSvgBanner title={p.title} grad={p.grad} />
+                )}
 
-                {/* Dark Gradient Overlay */}
+                {/* Dark Gradient Overlay for seamless blending */}
                 <div
                   style={{
                     position: "absolute",
                     inset: 0,
                     background:
-                      "linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(15,23,42,0.85) 100%)",
+                      "linear-gradient(180deg, rgba(0,0,0,0) 35%, rgba(15,23,42,0.85) 100%)",
                     pointerEvents: "none",
                   }}
                 />
@@ -237,7 +340,7 @@ export function Projects() {
                 )}
               </div>
 
-              {/* Card Body */}
+              {/* Card Content */}
               <div
                 style={{
                   padding: "20px",
@@ -270,7 +373,7 @@ export function Projects() {
                   {p.desc}
                 </p>
 
-                {/* Tags */}
+                {/* Tech Pills */}
                 <div
                   style={{
                     display: "flex",
@@ -284,7 +387,7 @@ export function Projects() {
                   ))}
                 </div>
 
-                {/* Links */}
+                {/* Bottom Action Links */}
                 <div
                   style={{
                     display: "flex",
@@ -346,7 +449,7 @@ export function Projects() {
           ))}
         </div>
 
-        {/* Navigation Buttons */}
+        {/* Previous Page Button */}
         <button
           disabled={page === 0}
           onClick={() => setPage((p) => Math.max(0, p - 1))}
@@ -375,6 +478,7 @@ export function Projects() {
           <ChevronLeft size={16} />
         </button>
 
+        {/* Next Page Button */}
         <button
           disabled={page === maxPage}
           onClick={() => setPage((p) => Math.min(maxPage, p + 1))}
@@ -404,7 +508,7 @@ export function Projects() {
         </button>
       </div>
 
-      {/* Pagination Dots */}
+      {/* Pagination Bar */}
       <div
         style={{
           display: "flex",
